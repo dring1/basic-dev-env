@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  basic-dev-env:
+    image: basic-dev-env:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../:/go/src/github.com/dring1/basic-dev-env
+    environment:
+      - ENVIRONMENT=DEVELOPMENT

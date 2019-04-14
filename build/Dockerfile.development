@@ -1,0 +1,10 @@
+FROM golang:1.12.3-stretch
+
+ENV APP_DIR=/go/src/github.com/dring1/basic-dev-env
+WORKDIR ${APP_DIR}
+
+COPY . .
+ENV GO111MODULE=on
+RUN go get github.com/githubnemo/CompileDaemon
+
+ENTRYPOINT [ "./bin/entry.sh" ]

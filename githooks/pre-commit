@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -o pipefail
+
+# relative to the install location
+source './scripts/console.sh'
+
+files=$(git ls-files '*.go')
+
+code="0"
+for script in ./githooks/run-*.sh; do
+	info "Executing: ${script} "
+	./"${script}" "${files[@]}"
+	result="${?}"
+	if [ $result -ne 0 ]; then
+		code=${result}
+	fi
+done
+if [ $code -ne 0 ]; then
+	error "******ERROR******"
+fi
+exit $code
